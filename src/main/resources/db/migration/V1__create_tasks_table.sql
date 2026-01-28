@@ -1,0 +1,9 @@
+CREATE TABLE tasks (
+    id UNIQUEIDENTIFIER NOT NULL PRIMARY KEY DEFAULT NEWID(),
+    title NVARCHAR(255) NOT NULL,
+    description NVARCHAR(1000) NULL,
+    created_at DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME(),
+    status VARCHAR(20) NOT NULL
+);
+
+CREATE INDEX idx_tasks_status ON tasks(status);
