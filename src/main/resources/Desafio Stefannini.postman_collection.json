@@ -1,0 +1,151 @@
+{
+	"info": {
+		"_postman_id": "430cf968-9211-4352-8745-4834281503dd",
+		"name": "Desafio Stefannini",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7450646"
+	},
+	"item": [
+		{
+			"name": "Criar tarefa",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Estudar Spring\",\n    \"description\": \"Ler docs sobre Spring Boot\",\n    \"status\": \"PENDING\"\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar por id",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tasks/cc0f4266-3e35-41dc-b429-9f54ce11290b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tasks",
+						"cc0f4266-3e35-41dc-b429-9f54ce11290b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar todas",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar task",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Estudar Spring Boot\",\n    \"description\": \"Ler docs e fazer um exemplo\",\n    \"status\": \"IN_PROGRESS\"\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/tasks/cc0f4266-3e35-41dc-b429-9f54ce11290b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tasks",
+						"cc0f4266-3e35-41dc-b429-9f54ce11290b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Excluir Task",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tasks/cc0f4266-3e35-41dc-b429-9f54ce11290b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tasks",
+						"cc0f4266-3e35-41dc-b429-9f54ce11290b"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -56,6 +56,8 @@ Flyway aplica `V1__create_tasks_table.sql` no banco `todo_db`.
 
 Status válidos: `PENDING`, `IN_PROGRESS`, `COMPLETED`.
 
+Collection Postman: `src/main/resources/Desafio Stefannini.postman_collection.json`
+
 ### Swagger / OpenAPI
 - UI: `http://localhost:8080/swagger-ui.html`
 - Docs JSON: `http://localhost:8080/v3/api-docs`
