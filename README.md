@@ -60,6 +60,39 @@ Status válidos: `PENDING`, `IN_PROGRESS`, `COMPLETED`.
 - UI: `http://localhost:8080/swagger-ui.html`
 - Docs JSON: `http://localhost:8080/v3/api-docs`
 
+### Deploy em ECS Fargate com ALB (Terraform)
+Arquivos em `infra/terraform` criam:
+- VPC pública, ALB, Target Group, SGs
+- Repositório ECR
+- Cluster ECS Fargate, Task Definition, Service com ALB
+
+Passos rápidos:
+1) Autentique na AWS (`aws configure`) e escolha a região (var `aws_region`, padrão `us-east-1`).
+2) Build/push da imagem:
+```bash
+cd api-spring
+IMAGE_TAG=latest
+ECR_REPO=$(aws ecr describe-repositories --query 'repositories[?repositoryName==`todo-api`].repositoryUri' --output text || echo "")
+if [ -z "$ECR_REPO" ]; then
+  aws ecr create-repository --repository-name todo-api
+  ECR_REPO=$(aws ecr describe-repositories --query 'repositories[?repositoryName==`todo-api`].repositoryUri' --output text)
+fi
+aws ecr get-login-password | docker login --username AWS --password-stdin "${ECR_REPO%/*}"
+docker build -t "$ECR_REPO:$IMAGE_TAG" .
+docker push "$ECR_REPO:$IMAGE_TAG"
+```
+3) Provisionar ECS/ALB via Terraform:
+```bash
+cd infra/terraform
+terraform init
+terraform apply -var="image_tag=$IMAGE_TAG" -auto-approve
+```
+4) Após aplicar, acesse o ALB em `alb_dns_name` de `terraform output`. Swagger: `http://<alb_dns_name>/swagger-ui.html`
+
+Variáveis úteis (`infra/terraform/variables.tf`):
+- `project_name`, `aws_region`, `container_port`, `desired_count`, `task_cpu`, `task_memory`
+- DB envs: `db_host`, `db_port`, `db_name`, `db_username`, `db_password`
+
 ### Testes
 ```bash
 cd api-spring
